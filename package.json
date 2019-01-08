@@ -1,0 +1,14 @@
+{
+  "name": "projeto-node-pos",
+  "version": "1.0.0",
+  "description": "Projeto Node POS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Paulo Diniz",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.18.0"
+  }
+}
