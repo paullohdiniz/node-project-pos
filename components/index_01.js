@@ -4,36 +4,82 @@
 2 - Obter o endereço de um usuário a partir do seu ID
 */
 
-function obterUsuario(callback){
-	setTimeout(function() {
-		return callback (null,
-		{
-			id: 1,
-			nome: "Paulo Diniz",
-			dataNascimento: new Date()
-		})
-	}, 1000)
+function obterUsuario(){
+	return new Promise(function resolvePromise(resolve, reject){
+		setTimeout(function() {
+			return resolve (
+			{
+				id: 1,
+				nome: "Paulo Diniz",
+				dataNascimento: new Date()
+			})
+		}, 1000)
+	})
+	
 }
 
-function obterTelefoneById(idUsuario, callback){
-	setTimeout(() => {
-		return callback (null,{
-			telefone: '11111111',
-			ddd: 11
-		})
-	}, 2000);
+function obterTelefoneById(idUsuario){
+	return new Promise (function resolvePromise(resolve, reject){
+
+		setTimeout(() => {
+			return resolve(
+			{
+				telefone: '11111111',
+				ddd: 11
+			})
+		}, 2000);
+	})
+	
 }
 
-function obterEnderecoById(idUsuario, callback){
-	setTimeout(() => {
-		return callback (null,{
-			rua: 'Rua dos bobos',
-			numero: 0
-		})
-	}, 2000);
+function obterEnderecoById(idUsuario){
+	return new Promise (function resolveEndereco(resolve, reject){
+		setTimeout(() => {
+			return resolve ({
+				rua: 'Rua dos bobos',
+				numero: 0
+			})
+		}, 2000);
+	})
 }
 
-function resolverUsuario(error, usuario){
+const usuarioPromise = obterUsuario()
+
+usuarioPromise
+	.then (function (usuario){
+		return obterTelefoneById(usuario.id)
+		 .then (function resolveTelefone(result){
+			 return {
+				 usuario:{
+					 usuario: usuario.nome,
+					 id: usuario.id
+				 },
+				 telefone: result
+			 }
+		 })
+	})
+	.then (function (resultado){
+		return obterEnderecoById(resultado.usuario.id)
+		.then(function resolveEndereco(result){
+			return {
+				usuario:  resultado.usuario,
+				telefone: resultado.telefone,
+				endereco: result
+			}
+		})
+	})
+	.then(function (resultados){
+		console.log(`
+		Nome: ${resultados.usuario.nome}
+		Endereço: ${resultados.endereco.rua}, ${resultados.endereco.numero}
+		Telefone: ${resultados.telefone.ddd}, ${resultados.telefone.telefone}
+		`)
+	})
+	.catch(function (error){
+		console.log('DEU RUIM')
+	})
+
+/*function resolverUsuario(error, usuario){
 	console.log('usuario', usuario)
 }
 
@@ -43,10 +89,10 @@ function resolverTelefone(error, telefone){
 
 function resolverEndereco(error, endereco){
 	console.log(endereco)
-}
+}*/
 
 
-obterUsuario(function resolverUsuario(error, usuario){
+/*obterUsuario(function resolverUsuario(error, usuario){
 	
 	// null || "" || 0 == false
 	if (error)
@@ -78,3 +124,4 @@ obterUsuario(function resolverUsuario(error, usuario){
 	})
 	
 })
+*/

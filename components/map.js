@@ -1,5 +1,15 @@
 const service = require ('./service')
 
+Array.prototype.meuMap = function (callback){
+    const novoArray = []
+    for (let indice = 0; indice <= this.length -1 ; indice++){
+        const resultado = callback(this[indice], indice)
+        novoArray.push(resultado)
+    }
+    return novoArrayMap;
+}
+
+
 async function main(){
     try {
         
