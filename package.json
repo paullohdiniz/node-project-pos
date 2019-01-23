@@ -1,16 +1,30 @@
 {
-  "name": "projeto-node-pos",
+  "name": "node-project-pos",
   "version": "1.0.0",
-  "description": "Projeto Node POS",
+  "description": "Projeto NodeJS + ExpressJS como serviço para atender os requisitos de performance elaborado na minha pós.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Paulo Diniz",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/paullohdiniz/node-project-pos.git"
+  },
+  "keywords": [],
+  "author": "",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/paullohdiniz/node-project-pos/issues"
+  },
+  "homepage": "https://github.com/paullohdiniz/node-project-pos#readme",
   "dependencies": {
-    "axios": "^0.18.0",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.18.3",
+    "consolidate": "^0.15.1",
+    "dustjs-helpers": "^1.7.4",
+    "dustjs-linkedin": "^2.7.5",
     "express": "^4.16.4",
-    "npm": "^6.6.0"
+    "mongoose": "^5.4.6",
+    "pg": "^7.8.0"
   }
 }
