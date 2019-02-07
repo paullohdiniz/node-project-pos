@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 
-var db = require('./database/queries');
+var db = require('../database/queries');
 
 
 router.get('/api/puppies', db.getAllPuppies);

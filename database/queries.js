@@ -46,7 +46,7 @@ function getAllPuppies(req, res, next) {
       });
   }
   
-  function getSinglePuppy(req, res, next) {
+  function getSinglePuppy(req, res) {
     var pupID = parseInt(req.params.id);
     db.one('SELECT * FROM public.block where id = $1', pupID)
       .then(function (data) {
@@ -58,7 +58,7 @@ function getAllPuppies(req, res, next) {
           });
       })
       .catch(function (err) {
-        return next(err);
+        //return next(err);
       });
   }
 
