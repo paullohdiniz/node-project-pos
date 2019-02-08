@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+const fetch = require('node-fetch');
 
 var bodyParser = require('body-parser');
 var app = express();
@@ -9,29 +10,35 @@ app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 var db = require('../database/queries');
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
+// router.get('/', function(req, res, next) {
+//   res.send('respond with a resource');
+// });
 
-router.post('/valida',function(req, res, next) {
+router.post('/valida', async function(req, res, next) {
     var id = parseInt(req.body.id);
     console.log('ID: ' + id);
+  
+    const url = 'http://localhost:3000';
+    const context = 'api/blocks';
+    const resp = await fetch(`${url}/${context}/${id}`)
+            .then(res => res.json())
+            .then(json => console.log(json));
     
-    db.getSinglePuppy(id)
-      .then(function (data) {
-        res.status(200)
-          .json({
-            status: 'success',
-            data: data,
-            message: 'Retrieved ONE puppy'
-          });
-      })
-      .catch(function (err) {
-        return next(err);
-      });
-    //var name = req.body.nome;
-    console.log('Passando no values 2');
-    //res.send(retorno);
+    res.send(resp);
 });
+
+router.get('/', async function(req, res, next) {
+    var id = parseInt(req.body.id);
+    console.log('ID: ' + id);
+  
+    const url = 'http://localhost:3000';
+    const context = 'api/blocks';
+    const resp = await fetch(`${url}/${context}/`)
+            .then(res => res.json())
+            .then(json => console.log(json));
+    
+    res.send(resp);
+});
+
 
 module.exports = router;

@@ -5,11 +5,11 @@ var router = express.Router();
 var db = require('../database/queries');
 
 
-router.get('/api/puppies', db.getAllPuppies);
-router.get('/api/puppies/:id', db.getSinglePuppy);
-router.post('/api/puppies', db.createPuppy);
-router.put('/api/puppies/:id', db.updatePuppy);
-router.delete('/api/puppies/:id', db.removePuppy);
+router.get('/api/blocks', db.getAllBlock);
+router.get('/api/blocks/:id', db.getSingleBlock);
+router.post('/api/blocks', db.createBlock);
+router.put('/api/blocks/:id', db.updateBlock);
+router.delete('/api/blocks/:id', db.removeBlock);
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
