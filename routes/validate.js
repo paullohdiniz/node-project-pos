@@ -15,16 +15,18 @@ var db = require('../database/queries');
 // });
 
 router.post('/valida', async function(req, res, next) {
+    
     var id = parseInt(req.body.id);
     console.log('ID: ' + id);
-  
     const url = 'http://localhost:3000';
     const context = 'api/blocks';
-    const resp = await fetch(`${url}/${context}/${id}`)
+
+    const resp = await fetch(`${context}/${id}`)
             .then(res => res.json())
-            .then(json => console.log(json));
+            .then(json => console.log(json))
+            .then(res => res.send(resp));
     
-    res.send(resp);
+    //res.send(resp);
 });
 
 router.get('/', async function(req, res, next) {
@@ -33,7 +35,7 @@ router.get('/', async function(req, res, next) {
   
     const url = 'http://localhost:3000';
     const context = 'api/blocks';
-    const resp = await fetch(`${url}/${context}/`)
+    const resp = await fetch(`${context}/`)
             .then(res => res.json())
             .then(json => console.log(json));
     
