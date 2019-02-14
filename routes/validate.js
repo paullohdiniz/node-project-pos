@@ -16,6 +16,7 @@ const CONTEXT = 'bd/blocks';
 //   res.send('respond with a resource');
 // });
 
+
 router.post('/valida', async function(req, res, next) {
     
     var id = parseInt(req.body.id);
