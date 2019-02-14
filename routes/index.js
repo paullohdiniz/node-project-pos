@@ -5,11 +5,11 @@ var router = express.Router();
 var db = require('../database/queries');
 
 
-router.get('/api/blocks', db.getAllBlock);
-router.get('/api/blocks/:id', db.getSingleBlock);
-router.post('/api/blocks', db.createBlock);
-router.put('/api/blocks/:id', db.updateBlock);
-router.delete('/api/blocks/:id', db.removeBlock);
+router.get('/bd/blocks', db.getAllBlock);
+router.get('/bd/blocks/:id', db.getSingleBlock);
+router.post('/bd/blocks', db.createBlock);
+router.put('/bd/blocks/:id', db.updateBlock);
+router.delete('/bd/blocks/:id', db.removeBlock);
 
 /* GET home page. */
 router.get('/', function(req, res, next) {

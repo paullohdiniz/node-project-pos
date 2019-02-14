@@ -46,7 +46,7 @@ function getAllBlock(req, res, next) {
       });
   }
   
-  function getSingleBlock(req, res) {
+function getSingleBlock(req, res, next) {
     var blockId = parseInt(req.params.id);
     db.any('SELECT bk.* FROM block_list bkl INNER JOIN block bk ON bkl.id = bk.block_list_id where bkl.id = $1', blockId)
       .then(function (data) {
@@ -58,7 +58,7 @@ function getAllBlock(req, res, next) {
           });
       })
       .catch(function (err) {
-        //return next(err);
+        return next(err);
       });
   }
 

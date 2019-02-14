@@ -8,6 +8,8 @@ app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
 var db = require('../database/queries');
+const URL = 'http://localhost:3000';
+const CONTEXT = 'bd/blocks';
 
 /* GET users listing. */
 // router.get('/', function(req, res, next) {
@@ -18,28 +20,37 @@ router.post('/valida', async function(req, res, next) {
     
     var id = parseInt(req.body.id);
     console.log('ID: ' + id);
-    const url = 'http://localhost:3000';
-    const context = 'api/blocks';
-
-    const resp = await fetch(`${context}/${id}`)
+    
+    const resp = await fetch(`${URL}/${CONTEXT}/${id}`)
             .then(res => res.json())
-            .then(json => console.log(json))
-            .then(res => res.send(resp));
+            .then(json => res.send(json))
+            .catch(error => console.log(error));
+    
+    res.send(resp);
+});
+
+router.get('/:id', async function(req, res, next) {
+    //var id = parseInt(req.param.id);
+    var id =1;
+    console.log('ID_: ' + id);
+    
+    const resp = await fetch(`${URL}/${CONTEXT}/${id}`)
+            .then(res => res.json())
+            .then(json => res.send(json))
+            .catch(error => console.log(error));
     
     //res.send(resp);
 });
 
 router.get('/', async function(req, res, next) {
-    var id = parseInt(req.body.id);
-    console.log('ID: ' + id);
   
-    const url = 'http://localhost:3000';
-    const context = 'api/blocks';
-    const resp = await fetch(`${context}/`)
+    console.log('ALL BLOCKS');
+    const resp = await fetch(`${URL}/${CONTEXT}/`)
             .then(res => res.json())
-            .then(json => console.log(json));
+            .then(json => res.send(json))
+            .catch(error => console.log(error));
     
-    res.send(resp);
+    //res.send(resp);
 });
 
 
