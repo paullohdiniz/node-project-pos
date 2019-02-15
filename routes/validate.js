@@ -7,7 +7,7 @@ var app = express();
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
-var db = require('../database/queries');
+//var db = require('../database/queries');
 const URL = 'http://localhost:3000';
 const CONTEXT = 'bd/blocks';
 
@@ -19,7 +19,7 @@ const CONTEXT = 'bd/blocks';
 
 router.post('/valida', async function(req, res, next) {
     
-    var id = parseInt(req.body.id);
+var id = parseInt(req.body.id);
     console.log('ID: ' + id);
     
     const resp = await fetch(`${URL}/${CONTEXT}/${id}`)
