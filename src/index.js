@@ -12,7 +12,7 @@ router.put('/bd/blocks/:id', db.updateBlock);
 router.delete('/bd/blocks/:id', db.removeBlock);
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/', function (req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
