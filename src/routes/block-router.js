@@ -9,11 +9,11 @@ app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
 
-router.post('/valida', controller.valida);
+router.get('/valida/:id', controller.valida);
 
-router.get('/:id', controller.getPar);
+router.get('/:id', controller.getById);
 
-router.get('/', controller.get);
+router.get('/', controller.getAll);
 
 
 module.exports = router;

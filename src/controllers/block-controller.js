@@ -4,7 +4,7 @@ const fetch = require('node-fetch');
 const URL = 'http://localhost:3000';
 const CONTEXT = 'bd/blocks';
 
-exports.getPar = async (req, res, next) => {
+exports.getById = async (req, res, next) => {
     var id = parseInt(req.params.id);
     console.log('ID_: ' + id);
 
@@ -15,7 +15,7 @@ exports.getPar = async (req, res, next) => {
 
 }
 
-exports.get = async (req, res, next) => {
+exports.getAll = async (req, res, next) => {
     console.log('ALL BLOCKS');
     const resp = await fetch(`${URL}/${CONTEXT}/`)
         .then(res => res.json())
@@ -26,8 +26,8 @@ exports.get = async (req, res, next) => {
 
 exports.valida = async (req, res, next) => {
 
-    var id = parseInt(req.body.id);
-    console.log('ID: ' + id);
+    var id = parseInt(req.params.id);
+    console.log('ID_VALIDA: ' + id);
 
     const resp = await fetch(`${URL}/${CONTEXT}/${id}`)
             .then(res => res.json())
