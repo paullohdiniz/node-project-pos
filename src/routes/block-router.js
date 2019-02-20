@@ -1,6 +1,7 @@
 var express = require('express');
 const debug = require('debug')('node-project-pos');
 var router = express.Router();
+
 const controller = require('../controllers/block-controller');
 
 var bodyParser = require('body-parser');
@@ -10,10 +11,13 @@ app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
 
 router.get('/valida/:id', controller.valida);
-
+//router.get('/pg/:id', controller.getByIdPg);
+router.get('/pg/', controller.getAll);
+router.post('/', controller.post);
+router.get('/', controller.get);
 router.get('/:id', controller.getById);
-
-router.get('/', controller.getAll);
+router.delete('/', controller.delete);
+router.put('/:id', controller.put);
 
 
 module.exports = router;

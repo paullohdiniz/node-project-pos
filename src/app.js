@@ -4,6 +4,17 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+var mongoose = require('mongoose');
+
+///Mongoo
+///paullohdiniz Futurama2000 Cluster0
+///mongodb+srv://paullohdiniz:Futurama2000@cluster0-kmhgx.mongodb.net/test?retryWrites=true
+mongoose.connect('mongodb+srv://paullohdiniz:Futurama2000@cluster0-kmhgx.mongodb.net/test?retryWrites=true');
+
+//Carrega os models
+var Blockchain = require('./models/blockchain')
+
+//Carrega as rotas
 var indexRouter = require('./index');
 var usersRouter = require('./routes/users');
 var blockRouter = require('./routes/block-router');
@@ -22,7 +33,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/api/blockchair', blockRouter);
+app.use('/api/blockschair', blockRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

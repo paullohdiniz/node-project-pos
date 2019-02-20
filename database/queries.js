@@ -9,7 +9,6 @@ var options = {
 
 var pgp = require('pg-promise')(options);
 
-
 var connectionString = 'postgres://postgres:Futurama2000@localhost:5432/financeira_db';
 // const connectionString = new Client({
 //     user: 'postgres',
