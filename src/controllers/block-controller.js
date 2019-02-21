@@ -29,14 +29,16 @@ exports.valida = async (req, res, next) => {
     //TODO começar aqui a validação do blockchain
     
     let validation = new ValidationBlockchain();
-    validation.validablockschain(req.body.id,'Teste');
+    //validation.validablockschain(req.body.id,'Teste');
     
     var id = parseInt(req.params.id);
     console.log('ID_VALIDA: ' + id);
 
     const resp = await fetch(`${URL}/${CONTEXT}/${id}`)
             .then(res => res.json())
-            .then(json => res.send(json))
+            .then(json => {
+                res.status(200).send(validation.validablockschain(json, 'Valida'))
+            })
             .catch(error => console.log(error));
 }
 ///Novo cabeçalho para mongodb -- TODO criar classe
