@@ -2,8 +2,27 @@
 const fetch = require('node-fetch');
 const ValidationBlockchain = require('../validation/blockchain-validator')
 
-const URL = 'http://localhost:3000';
+var p = normalizePort(process.env.PORT || '3000');
+
+const URL = 'http://localhost:' + p;
 const CONTEXT = 'bd/blocks';
+
+
+function normalizePort(val) {
+    var port = parseInt(val, 10);
+  
+    if (isNaN(port)) {
+      // named pipe
+      return val;
+    }
+  
+    if (port >= 0) {
+      // port number
+      return port;
+    }
+  
+    return false;
+  }
 
 // exports.getByIdPg = async (req, res, next) => {
 //     var id = parseInt(req.params.id);
