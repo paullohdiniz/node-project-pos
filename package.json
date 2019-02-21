@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/server.js"
+    "start": "node ./app/server.js"
   },
   "dependencies": {
     "bluebird": "^3.5.3",
