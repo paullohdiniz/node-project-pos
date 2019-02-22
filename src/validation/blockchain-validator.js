@@ -1,5 +1,7 @@
 let error = [];
 
+var sha256 = require('js-sha256');
+
 function ValidationBlockchain(){
     error = [];
 }
@@ -24,6 +26,9 @@ function validablock(obj) {
             }
         }
     }
+    var hash = sha256.create();
+    console.log(hash.update(resultado).hex());
+    
     console.log('RESULT: ' + JSON.stringify(resultado));
 }
 
