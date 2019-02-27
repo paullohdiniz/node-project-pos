@@ -2,9 +2,9 @@
 const fetch = require('node-fetch');
 const ValidationBlockchain = require('../validation/blockchain-validator')
 
-var p = normalizePort(process.env.PORT || '3000');
+var porta = normalizePort(process.env.PORT || '3000');
 
-const URL = 'http://localhost:' + p;
+const URL = 'http://localhost:' + porta;
 const CONTEXT = 'bd/blocks';
 
 
@@ -35,36 +35,54 @@ function normalizePort(val) {
 
 // }
 
-exports.getAll = async (req, res, next) => {
+exports.getAll = (req, res, next) => {
     console.log('ALL BLOCKS');
-    const resp = await fetch(`${URL}/${CONTEXT}/`)
+    const resp = fetch(`${URL}/${CONTEXT}/`)
         .then(res => res.json())
         .then(json => res.send(json))
         .catch(error => console.log(error));
 
 }
 
-exports.valida = async (req, res, next) => {
-    //TODO começar aqui a validação do blockchain
+// exports.valida = async(req, res, next) => {
+//     //TODO começar aqui a validação do blockchain
     
-    let validation = new ValidationBlockchain();
-    //validation.validablockschain(req.body.id,'Teste');
+//     let validation = new ValidationBlockchain();
+//     //validation.validablockschain(req.body.id,'Teste');
     
-    var id = parseInt(req.params.id);
-    console.log('ID_VALIDA: ' + id);
+//     var id = parseInt(req.params.id);
+//     console.log('ID_VALIDA: ' + id);
 
-    const resp = await fetch(`${URL}/${CONTEXT}/${id}`)
-            .then(res => res.json())
-            .then(json => {
-                res.status(200).send(validation.validablockschain(json, 'Valida'))
-            })
-            .catch(error => console.log(error));
+//     const resp = await fetch(`${URL}/${CONTEXT}/${id}`)
+//             .then(res => res.json())
+//             .then(json => {
+//                 res.status(200).send(validation.validablockschain(json, 'Valida'))
+//             })
+//             .catch(error => console.log(error));
+// }
+
+exports.valida = async(req, res, next) => {
+    const validation = new ValidationBlockchain();
+    //validation.validablockschain(req.body.id,'Teste');
+    try{
+        var id = parseInt(req.params.id);
+        console.log('ID_VALIDA: ' + id);
+        const data = await fetch(`${URL}/${CONTEXT}/${id}`);
+        res.status(200).send(data);
+    }catch(e){
+        res.status(500).send({
+            message : 'Falha ao validar dados de blockchain'
+        });
+    }
 }
+
 ///Novo cabeçalho para mongodb -- TODO criar classe
 const mongoose = require('mongoose');
 const Blockchain = mongoose.model('Blockchain');
+const repository = require('../repositories/blockchain-repository');
 
-exports.post = async (req, res, next) => {
+
+exports.post = (req, res, next) => {
     var blockchain = new Blockchain(req.body);
     console.log('blockchain: ' + blockchain);
     blockchain.save()
@@ -77,28 +95,30 @@ exports.post = async (req, res, next) => {
     
 }
 
-exports.getById = async (req, res, next) => {
-    Blockchain
-    .findById(req.params.id)
-    .then(response => {
-        res.status(200).send(response);
-    })
-    .catch(error => {
-        res.status(400).send({message : 'Busca de Blockchain com erro', data : error});
-    });
+exports.getById = (req, res, next) => {
+    
+    repository
+        .getById(req.params.id)
+        .then(response => {
+            res.status(200).send(response);
+        })
+        .catch(error => {
+            res.status(400).send({message : 'Busca de Blockchain com erro', data : error});
+        });
     
 }
-exports.get = async (req, res, next) => {
-    Blockchain.find({})
-    .then(response => {
-        res.status(200).send(response);
-    })
-    .catch(error => {
-        res.status(400).send({message : 'Busca de Blockchain com erro', data : error});
-    });
+exports.get = (req, res, next) => {
+    repository
+        .get()
+            .then(response => {
+                res.status(200).send(response);
+            })
+            .catch(error => {
+                res.status(400).send({message : 'Busca de Blockchain com erro', data : error});
+            });
     
 }
-exports.put = async (req, res, next) => {
+exports.put = (req, res, next) => {
    
     Blockchain.findByIdAndUpdate(req.params.id, {
         $set:{
@@ -113,7 +133,7 @@ exports.put = async (req, res, next) => {
     });
     
 }
-exports.delete = async (req, res, next) => {
+exports.delete = (req, res, next) => {
     Blockchain.deleteMany({})
     .then(response => {
         res.status(200).send(response);
