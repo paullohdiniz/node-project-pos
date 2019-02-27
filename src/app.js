@@ -9,7 +9,7 @@ var mongoose = require('mongoose');
 ///Mongoo
 ///paullohdiniz Futurama2000 Cluster0
 ///mongodb+srv://paullohdiniz:Futurama2000@cluster0-kmhgx.mongodb.net/test?retryWrites=true
-mongoose.connect('mongodb+srv://paullohdiniz:Futurama2000@cluster0-kmhgx.mongodb.net/test?retryWrites=true');
+//mongoose.connect('mongodb+srv://paullohdiniz:Futurama2000@cluster0-kmhgx.mongodb.net/test?retryWrites=true');
 
 //Carrega os models
 var Blockchain = require('./models/blockchain')

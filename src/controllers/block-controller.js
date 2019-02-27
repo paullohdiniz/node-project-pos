@@ -68,7 +68,7 @@ exports.valida = async(req, res, next) => {
         var id = parseInt(req.params.id);
         console.log('ID_VALIDA: ' + id);
         const data = await fetch(`${URL}/${CONTEXT}/${id}`);
-        res.status(200).send(data);
+        res.status(200).send(data.json());
     }catch(e){
         res.status(500).send({
             message : 'Falha ao validar dados de blockchain'
@@ -95,17 +95,13 @@ exports.post = (req, res, next) => {
     
 }
 
-exports.getById = (req, res, next) => {
-    
-    repository
-        .getById(req.params.id)
-        .then(response => {
-            res.status(200).send(response);
-        })
-        .catch(error => {
-            res.status(400).send({message : 'Busca de Blockchain com erro', data : error});
-        });
-    
+exports.getById = async(req, res, next) => {
+    try{
+        const data = await repository.getById(req.params.id);
+        res.status(200).send(data);
+    }catch(e){
+        res.status(400).send({message : 'Busca de Blockchain com erro', data : error});
+    }    
 }
 exports.get = (req, res, next) => {
     repository
