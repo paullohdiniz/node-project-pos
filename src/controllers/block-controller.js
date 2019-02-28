@@ -67,7 +67,10 @@ exports.valida = async(req, res, next) => {
     try{
         var id = parseInt(req.params.id);
         console.log('ID_VALIDA: ' + id);
+        
         const data = await fetch(`${URL}/${CONTEXT}/${id}`);
+        
+        console.log('DADO:  ' + data);
         res.status(200).send(data.json());
     }catch(e){
         res.status(500).send({
@@ -83,15 +86,15 @@ const repository = require('../repositories/blockchain-repository');
 
 
 exports.post = (req, res, next) => {
-    var blockchain = new Blockchain(req.body);
-    console.log('blockchain: ' + blockchain);
-    blockchain.save()
-    .then(response => {
+    try{
+        var blockchain = new Blockchain(req.body);
+        console.log('blockchain: ' + blockchain);
+        const data = repository.save(blockchain);
         res.status(201).send({message : 'Blockchain cadastrado com sucesso'});
-    })
-    .catch(error => {
-        res.status(400).send({message : 'Blockchain cadastrado com sucesso', data : error});
-    });
+    }
+    catch(e){
+        res.status(400).send({message : 'Blockchain não cadastrado', data : error});
+    }
     
 }
 

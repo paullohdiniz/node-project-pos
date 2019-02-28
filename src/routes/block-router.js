@@ -12,7 +12,8 @@ app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
 router.get('/valida/:id', controller.valida);
 //router.get('/pg/:id', controller.getByIdPg);
-router.get('/pg/', controller.getAll);
+router.get('/pg', controller.getAll);
+//router.post('/pg', controller.postPg);
 router.post('/', controller.post);
 router.get('/', controller.get);
 router.get('/:id', controller.getById);

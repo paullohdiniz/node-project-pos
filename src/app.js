@@ -9,8 +9,16 @@ var mongoose = require('mongoose');
 ///Mongoo
 ///paullohdiniz Futurama2000 Cluster0
 ///mongodb+srv://paullohdiniz:Futurama2000@cluster0-kmhgx.mongodb.net/test?retryWrites=true
-//mongoose.connect('mongodb+srv://paullohdiniz:Futurama2000@cluster0-kmhgx.mongodb.net/test?retryWrites=true');
+//mongoose.connect('mongodb://paullohdiniz:Futurama2000@clusterpos-shard-00-00-fyf3v.mongodb.net:27017,clusterpos-shard-00-01-fyf3v.mongodb.net:27017,clusterpos-shard-00-02-fyf3v.mongodb.net:27017/admin?replicaSet=ClusterPos-shard-0&ssl=true');
 
+// const MongoClient = require('mongodb').MongoClient;
+// const uri = "mongodb://paullohdiniz:Futurama2000@clusterpos-shard-00-00-fyf3v.mongodb.net:27017,clusterpos-shard-00-01-fyf3v.mongodb.net:27017,clusterpos-shard-00-02-fyf3v.mongodb.net:27017/admin?replicaSet=ClusterPos-shard-0&ssl=true";
+// const client = new MongoClient(uri, { useNewUrlParser: true });
+// client.connect(err => {
+//   const collection = client.db("mongodb-node-pos").collection("blockchaindb");
+//  // perform actions on the collection object
+//   client.close();
+// });
 //Carrega os models
 var Blockchain = require('./models/blockchain')
 
